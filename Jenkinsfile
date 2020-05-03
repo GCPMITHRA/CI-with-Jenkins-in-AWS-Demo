@@ -24,7 +24,7 @@ pipeline {
 	   stage('Build Docker Image') { 
 		steps {
                    script {
-		     myimage = docker.build("gcr.io/my first project/GCPMITHRA/devops:${env.BUILD_ID}") 
+		     myimage = docker.build("gcr.io/advance-state-261418/gcpmithra/devops:${env.BUILD_ID}") 
                    }
                 }
 	   }
