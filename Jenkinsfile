@@ -23,7 +23,9 @@ pipeline {
 	   }
 	   stage('Build Docker Image') { 
 		steps {
-                   echo"Build Image Not Implemented"
+                   script {
+		     myimage = docker.build("gcr.io/my first project/GCPMITHRA/devops:${env.BUILD_ID}") 
+                   }
                 }
 	   }
 	   stage("Push Docker Image") {
