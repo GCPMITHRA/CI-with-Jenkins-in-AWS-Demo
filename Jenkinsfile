@@ -1,6 +1,12 @@
 pipeline {
     agent any 	
-	
+	environment {
+		
+		PROJECT_ID = 'advance-state-261418'
+                CLUSTER_NAME = 'sprint6-k8s-cluster'
+                LOCATION = 'us-central1-c'
+                CREDENTIALS_ID = 'advance-state-261418'		
+	}
 	
     stages {	
 	   stage('Checkout Project Code') {            
@@ -30,14 +36,24 @@ pipeline {
 	   }
 	   stage("Push Docker Image") {
                 steps {
-                   echo "Push Image Not Implemented"
-                }
-            }
+                   script {
+			   docker.withRegistry('https://gcr.io', 'gcr:advance-state-261418') 
+			   { 
+                            myimage.push("${env.BUILD_ID}")	
+			   }
+		   }
+		}
+	   }
+		  
 	   
            stage('Deploy to K8s') { 
                 steps{
-                   
-		   echo "Deployment  Not Implemented"
+                   echo "Deployment started ..."
+		   sh 'ls -ltr'
+		   sh 'pwd'
+		   sh "sed -i 's/tagversion/${env.BUILD_ID}/g' deployment.yaml"
+                   step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+		   echo "Deployment Finished ..."
             }
           }
     }
