@@ -1,11 +1,5 @@
 pipeline {
-    agent any 	
-	tools 
-	{
-	    // a bit ugly because there is no `@Symbol` annotation for the DockerTool
-	    // see the discussion about this in PR 77 and PR 52: 
-	    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'null'
-	}
+    agent any
 	environment {
 		
 		PROJECT_ID = 'advance-state-261418'
