@@ -6,7 +6,6 @@ pipeline {
                 CLUSTER_NAME = 'sprint6-k8s-cluster'
                 LOCATION = 'us-central1-c'
                 CREDENTIALS_ID = 'advance-state-261418'	
-		DOCKER_CERT_PATH = credentials('advance-state-261418')
 	}
 	
     stages {	
