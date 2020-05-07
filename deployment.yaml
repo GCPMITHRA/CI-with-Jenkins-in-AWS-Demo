@@ -17,7 +17,7 @@ spec:
   spec:
    containers:
    - name: myapp
-     image: gcpmithra/devops:tagversion
+     image: gcr.io/advance-state-261418/gcpmithra/devops:tagversion
      ports:
      - containerPort: 8080
 
